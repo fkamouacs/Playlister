@@ -1,40 +1,52 @@
-import React from "react";
+import { React, useState } from "react";
 import Song from "./song";
 
 const fullPlaylist = (props) => {
+  const [thumbnail, setThumbnail] = useState();
+
   const displaySongs = () => {
+    let songNumber = 0;
     return props.songs.length != 0 ? (
       props.songs.map((song) => {
-        return <Song key={song.song_id} data={song} />;
+        return (
+          <Song
+            key={song.song_id}
+            data={song}
+            func={pull_data}
+            songNum={songNumber++}
+          />
+        );
       })
     ) : (
       <> </>
     );
   };
-  console.log(props.data);
+
+  const pull_data = (data) => {
+    setThumbnail(`https://img.youtube.com/vi/${data}/0.jpg`);
+  };
+
   return (
-    <div>
-      <div className="bg-zinc-500 py-7">
-        <div className="flex justify-center">
-          <div className="flex flex-col w-full">
-            <div className="w-[336px] h-[189px] rounded-lg bg-black self-center"></div>
-            <div className="flex flex-col text-[#FFF] font-bold mx-[20px] mt-4 mb-2">
-              <div className="text-[28px] mb-2">{props.data.title}</div>
-              <div>{props.data.username}</div>
-            </div>
+    <div className="flex flex-col items-center  w-full">
+      <div className=" w-full max-w-3xl">
+        <div className="flex flex-col w-full  pt-4">
+          <img
+            className="self-center rounded-lg object-cover h-[220px] w-[400px]"
+            src={thumbnail}
+          />
+
+          <div className="flex flex-col  text-[#000] font-bold px-[20px] pt-[48px] pb-2  ">
+            <div className="text-[28px] mb-2">{props.data.title}</div>
+            <div>{props.data.username}</div>
           </div>
         </div>
-        <div className="flex justify-center mt-4 mx-[20px] font-medium ">
-          <button className="w-full h-[36px] rounded-3xl bg-[#FFF] mr-1">
-            Play All
-          </button>
-          <button className="w-full h-[36px] rounded-3xl bg-[#FFF] ml-1">
-            Shuffle
-          </button>
-        </div>
+      </div>
+      <div className="flex w-full max-w-3xl justify-center pt-4 px-[20px] font-medium">
+        <button className="w-full h-[36px] rounded-3xl mr-1">Play All</button>
+        <button className="w-full h-[36px] rounded-3xl ml-1">Shuffle</button>
       </div>
 
-      <div>{displaySongs()}</div>
+      <ul className="p-4 w-full max-w-3xl">{displaySongs()}</ul>
     </div>
   );
 };

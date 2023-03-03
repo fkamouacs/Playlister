@@ -12,10 +12,33 @@ const Song = (props) => {
       });
   }, [props.data]);
 
+  const getYoutubeId = () => {
+    if (JSON.stringify(song) != "{}") {
+      var regExp =
+        /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+      var match = song.link.match(regExp);
+      return match && match[7].length == 11 ? match[7] : false;
+    }
+    return "";
+  };
+
+  if (props.songNum == 0) {
+    const id = getYoutubeId();
+    props.func(id);
+  }
+
   return (
-    <ul className="list-none m-0 p-0">
-      <li>{song.title}</li>
-    </ul>
+    <li className="list-none m-0 p-0 flex mb-4">
+      <img
+        className="h-[90px] w-[160px] rounded-lg object-cover"
+        src={`https://img.youtube.com/vi/${getYoutubeId()}/0.jpg`}
+      />
+      <div className="ml-2">
+        <div className="font-bold text-[#0F0F0F]">{song.title}</div>
+        <div className="text-[#606060] text-[12px]">owner</div>
+      </div>
+      <div></div>
+    </li>
   );
 };
 
