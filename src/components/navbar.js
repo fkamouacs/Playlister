@@ -1,11 +1,17 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+
 export default function navbar(props) {
   const router = useRouter();
+
   const handleLogout = () => {
     localStorage.clear();
     router.reload("/");
+  };
+
+  const getUsername = () => {
+    return props.user ? props.user.username : null;
   };
 
   return (
@@ -25,15 +31,22 @@ export default function navbar(props) {
               <Link href="/signup">Signup</Link>
             </li>
             <li className="mx-4">
-              <Link href="login">Login</Link>
+              <Link href="/login">Login</Link>
             </li>
           </>
         )}
 
         {props.isLoggedIn ? (
-          <li className="mx-4">
-            <button onClick={handleLogout}>Logout</button>
-          </li>
+          <div className=" flex">
+            <li className="mx-2">
+              <Link href={`/${getUsername()}`}>
+                <img src="/profile-circle.svg" />
+              </Link>
+            </li>
+            <li className="mx-4">
+              <button onClick={handleLogout}>Logout</button>
+            </li>
+          </div>
         ) : (
           <></>
         )}

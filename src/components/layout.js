@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Navbar isLoggedIn={res.isLoggedIn} />
+      <Navbar isLoggedIn={res.isLoggedIn} user={res.user} />
       <main>{children}</main>
     </>
   );
