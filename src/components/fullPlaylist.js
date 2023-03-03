@@ -42,11 +42,16 @@ const fullPlaylist = (props) => {
         </div>
       </div>
       <div className="flex w-full max-w-3xl justify-center pt-4 px-[20px] font-medium">
-        <button className="w-full h-[36px] rounded-3xl mr-1">Play All</button>
-        <button className="w-full h-[36px] rounded-3xl ml-1">Shuffle</button>
+        <button className="flex justify-center items-center w-full h-[36px] text-white rounded-md mr-1 border-solid border-2 border-black bg-black">
+          <img src="/play.svg" className="mr-1" />
+          Play All
+        </button>
+        <button className="w-full h-[36px] rounded-md mr-1 border-solid border-2 border-black ml-1">
+          Shuffle
+        </button>
       </div>
 
-      <ul className="p-4 w-full max-w-3xl">{displaySongs()}</ul>
+      <ul className="px-[20px] py-5 w-full max-w-3xl">{displaySongs()}</ul>
     </div>
   );
 };
