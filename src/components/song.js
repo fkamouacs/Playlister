@@ -17,21 +17,23 @@ const Song = (props) => {
       var regExp =
         /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
       var match = song.link.match(regExp);
-      return match && match[7].length == 11 ? match[7] : false;
+      let id = match && match[7].length == 11 ? match[7] : false;
+      return `https://img.youtube.com/vi/${id}/0.jpg`;
     }
-    return "";
   };
 
-  if (props.songNum == 0) {
-    const id = getYoutubeId();
-    props.func(id);
-  }
+  useEffect(() => {
+    if (props.songNum == 0) {
+      const thumbnailURL = getYoutubeId();
+      props.setThumbnail(thumbnailURL);
+    }
+  });
 
   return (
     <li className="list-none m-0 p-0 flex mb-4">
       <img
         className="h-[90px] w-[160px] rounded-lg object-cover"
-        src={`https://img.youtube.com/vi/${getYoutubeId()}/0.jpg`}
+        src={getYoutubeId()}
       />
       <div className="ml-2">
         <div className="font-bold text-[#0F0F0F]">{song.title}</div>

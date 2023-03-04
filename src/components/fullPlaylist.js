@@ -12,7 +12,7 @@ const fullPlaylist = (props) => {
           <Song
             key={song.song_id}
             data={song}
-            func={pull_data}
+            setThumbnail={setThumbnail}
             songNum={songNumber++}
           />
         );
@@ -20,10 +20,6 @@ const fullPlaylist = (props) => {
     ) : (
       <> </>
     );
-  };
-
-  const pull_data = (data) => {
-    setThumbnail(`https://img.youtube.com/vi/${data}/0.jpg`);
   };
 
   return (
