@@ -30,14 +30,14 @@ const Song = (props) => {
   });
 
   return (
-    <li className="list-none m-0 p-0 flex mb-4">
+    <li className="list-none py-2 rounded-lg flex mb-4 bg-[#252527]">
       <img
-        className="h-[90px] w-[160px] rounded-lg object-cover"
+        className="h-[60px] w-[107px] rounded-lg object-cover"
         src={getYoutubeId()}
       />
       <div className="ml-2">
         <div className="font-bold ">{song.title}</div>
-        <div className="text-[#E65722] text-[12px]">owner</div>
+        <div className="text-[#b8461b] text-[12px]">owner</div>
       </div>
       <div></div>
     </li>

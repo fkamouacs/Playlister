@@ -12,7 +12,7 @@ export default function Login() {
 
   const router = useRouter();
 
-  const {isLoggedIn, user } = useAuth();
+  const { isLoggedIn, user } = useAuth();
 
   const handleLogin = async (email, password) => {
     const data = { email: email, password: password };
@@ -32,13 +32,13 @@ export default function Login() {
   return (
     <>
       {!isLoggedIn ? (
-        <div className="flex flex-row justify-center ">
+        <div className="flex flex-row justify-center items-center h-full ">
           <div>
-            <div className="flex flex-col text-center mt-[160px] border-[rgba(219,219,219)] border-[1px] px-2">
+            <div className="flex flex-col text-center  px-2">
               <div className="text-4xl font-bold tracking-wide p-8 mt-4">
                 Playlister
               </div>
-              <div className="w-[350px] mx-auto flex flex-col justify-center border-solid border-[#ccc] rounded-[5px] p-5">
+              <div className="w-[350px] mx-auto flex flex-col justify-center border-solid border-[#ccc] rounded-[5px] px-5">
                 <input
                   className="outline-none text-sm w-full border  mb-5 p-2.5 rounded-[5px] border-solid border-[#ccc]"
                   type="email"
@@ -56,7 +56,7 @@ export default function Login() {
                 />
 
                 <input
-                  className="bg-[#C26566] font-medium text-[white] cursor-pointer px-5 py-2.5 rounded-[5px] border-[none] w-full mb-16"
+                  className="bg-[#cf4e1f] font-medium text-[white] cursor-pointer px-5 py-2.5 rounded-[5px] border-[none] w-full mb-8"
                   type="submit"
                   value="Log in"
                   onClick={(e) => {
@@ -73,9 +73,9 @@ export default function Login() {
                 )}
               </div>
             </div>
-            <div className="signup-container p-4 mt-[16px] flex flex-row justify-center text-center border-[rgba(219,219,219)] border-[1px] px-2">
+            <div className="signup-container p-4 mt-4 flex flex-row justify-center text-center px-2">
               <p className=" pr-2">Don't have an account?</p>
-              <Link className="text-[#C26566] text font-medium" href="/signup">
+              <Link className="text-[#e65722] text font-medium" href="/signup">
                 Signup
               </Link>
             </div>

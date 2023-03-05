@@ -17,7 +17,7 @@ export default function navbar(props) {
   return (
     <nav className="flex justify-between px-4 py-8">
       <ul className="flex  list-none m-0 p-0">
-        <li className="mx-4">
+        <li>
           <Link href="/">Home</Link>
         </li>
       </ul>
@@ -27,10 +27,10 @@ export default function navbar(props) {
           <></>
         ) : (
           <>
-            <li className="mx-4">
+            <li className="mx-2">
               <Link href="/signup">Signup</Link>
             </li>
-            <li className="mx-4">
+            <li className="ml-4">
               <Link href="/login">Login</Link>
             </li>
           </>

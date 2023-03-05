@@ -22,6 +22,10 @@ const fullPlaylist = (props) => {
     );
   };
 
+  const getNumSongs = () => {
+    return props.songs.length != 1 ? `${props.songs.length} songs` : `1 song`;
+  };
+
   return (
     <div className="flex flex-col items-center px-4 w-full">
       <div className=" w-full max-w-lg">
@@ -33,7 +37,7 @@ const fullPlaylist = (props) => {
 
           <div className="flex flex-col font-['Roboto_Condensed'] tracking-wide pt-4 ">
             <div className="text-3xl font-bold">{props.data.title}</div>
-            <div className="text-[#E65722]">{props.data.username}</div>
+            <div className="text-[#b8461b]">{props.data.username}</div>
           </div>
         </div>
       </div>
@@ -47,8 +51,8 @@ const fullPlaylist = (props) => {
           SHUFFLE
         </button>
       </div>
-      <div className="pb-6 w-full">11 songs</div>
-      <ul className="w-full max-w-lg">{displaySongs()}</ul>
+      <div className="pb-6 w-full text-sm max-w-lg">{getNumSongs()}</div>
+      <ul className="w-full text-sm max-w-lg">{displaySongs()}</ul>
     </div>
   );
 };
