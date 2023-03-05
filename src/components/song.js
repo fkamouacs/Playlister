@@ -36,8 +36,8 @@ const Song = (props) => {
         src={getYoutubeId()}
       />
       <div className="ml-2">
-        <div className="font-bold text-[#0F0F0F]">{song.title}</div>
-        <div className="text-[#606060] text-[12px]">owner</div>
+        <div className="font-bold ">{song.title}</div>
+        <div className="text-[#E65722] text-[12px]">owner</div>
       </div>
       <div></div>
     </li>

@@ -15,7 +15,7 @@ export default function navbar(props) {
   };
 
   return (
-    <nav className="flex justify-between p-4">
+    <nav className="flex justify-between px-4 py-8">
       <ul className="flex  list-none m-0 p-0">
         <li className="mx-4">
           <Link href="/">Home</Link>

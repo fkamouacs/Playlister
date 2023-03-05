@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import Song from "./song";
 
 const fullPlaylist = (props) => {
@@ -23,31 +23,32 @@ const fullPlaylist = (props) => {
   };
 
   return (
-    <div className="flex flex-col items-center  w-full">
-      <div className=" w-full max-w-3xl">
-        <div className="flex flex-col w-full  pt-4">
+    <div className="flex flex-col items-center px-4 w-full">
+      <div className=" w-full max-w-lg">
+        <div className="flex flex-col w-full ">
           <img
-            className="self-center rounded-lg object-cover h-[220px] w-[400px]"
+            className="self-center rounded-lg object-cover w-full "
             src={thumbnail}
           />
 
-          <div className="flex flex-col  text-[#000] font-bold px-[20px] pt-[48px] pb-2  ">
-            <div className="text-[28px] mb-2">{props.data.title}</div>
-            <div>{props.data.username}</div>
+          <div className="flex flex-col font-['Roboto_Condensed'] tracking-wide pt-4 ">
+            <div className="text-3xl font-bold">{props.data.title}</div>
+            <div className="text-[#E65722]">{props.data.username}</div>
           </div>
         </div>
       </div>
-      <div className="flex w-full max-w-3xl justify-center pt-4 px-[20px] font-medium">
-        <button className="flex justify-center items-center w-full h-[36px] text-white rounded-md mr-1 border-solid border-2 border-black bg-black">
+      <div className="flex w-full max-w-lg justify-center text-sm  font-bold py-6">
+        <button className="flex justify-center items-center w-full h-[36px] py-5 text-[#1C1C1E] rounded-md mr-1 border-solid border-2 border-[#D5D5D5] bg-[#D5D5D5]">
           <img src="/play.svg" className="mr-1" />
-          Play All
+          PLAY ALL
         </button>
-        <button className="w-full h-[36px] rounded-md mr-1 border-solid border-2 border-black ml-1">
-          Shuffle
+        <button className="flex justify-center items-center w-full h-[36px] rounded-md mr-1 border-solid py-5 border-2 border-[#D5D5D5] ml-1">
+          <img src="/shuffle.svg" className="mr-1" />
+          SHUFFLE
         </button>
       </div>
-
-      <ul className="px-[20px] py-5 w-full max-w-3xl">{displaySongs()}</ul>
+      <div className="pb-6 w-full">11 songs</div>
+      <ul className="w-full max-w-lg">{displaySongs()}</ul>
     </div>
   );
 };
