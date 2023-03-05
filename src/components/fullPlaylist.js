@@ -31,7 +31,7 @@ const fullPlaylist = (props) => {
       <div className=" w-full max-w-lg">
         <div className="flex flex-col w-full ">
           <img
-            className="self-center rounded-lg object-cover w-full "
+            className="self-center rounded-lg object-cover w-full max-h-[240px] "
             src={thumbnail}
           />
 

@@ -29,17 +29,26 @@ const Song = (props) => {
     }
   });
 
+  const handlePlay = () => {
+    console.log("play");
+  };
+
   return (
-    <li className="list-none py-2 rounded-lg flex mb-4 bg-[#252527]">
-      <img
-        className="h-[60px] w-[107px] rounded-lg object-cover"
-        src={getYoutubeId()}
-      />
-      <div className="ml-2">
-        <div className="font-bold ">{song.title}</div>
-        <div className="text-[#b8461b] text-[12px]">owner</div>
+    <li className="list-none rounded-lg flex justify-between mb-4 bg-[#252527]">
+      <div className="flex  py-2">
+        <img
+          className="h-[60px] w-[107px] rounded-lg object-cover"
+          src={getYoutubeId()}
+        />
+        <div className="ml-2">
+          <div className="font-bold ">{song.title}</div>
+          <div className="text-[#b8461b] text-[12px]">owner</div>
+        </div>
       </div>
-      <div></div>
+
+      <div className="flex justify-center w-[40px] h-[35px] rounded-tr-lg rounded-bl-lg bg-[#e65722]">
+        <img src="/lightPlay.svg" className="p-2" onClick={handlePlay} />
+      </div>
     </li>
   );
 };
