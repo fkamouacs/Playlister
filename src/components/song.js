@@ -18,14 +18,22 @@ const Song = (props) => {
         /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
       var match = song.link.match(regExp);
       let id = match && match[7].length == 11 ? match[7] : false;
+      return id;
+    }
+  };
+
+  const getThumbnail = () => {
+    const id = getYoutubeId();
+    if (id) {
       return `https://img.youtube.com/vi/${id}/0.jpg`;
     }
   };
 
   useEffect(() => {
-    if (props.songNum == 0) {
-      const thumbnailURL = getYoutubeId();
-      props.setThumbnail(thumbnailURL);
+    const videoId = getYoutubeId();
+
+    if (videoId && !props.videoIds.includes(`${videoId}`)) {
+      props.videoIds.push(videoId);
     }
   });
 
@@ -38,7 +46,7 @@ const Song = (props) => {
       <div className="flex  py-2">
         <img
           className="h-[60px] w-[107px] rounded-lg object-cover"
-          src={getYoutubeId()}
+          src={getThumbnail()}
         />
         <div className="ml-2">
           <div className="font-bold ">{song.title}</div>

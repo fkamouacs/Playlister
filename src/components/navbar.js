@@ -43,7 +43,7 @@ export default function navbar(props) {
                 <img src="/profile-circle.svg" />
               </Link>
             </li>
-            <li className="mx-4">
+            <li className="ml-4">
               <button onClick={handleLogout}>Logout</button>
             </li>
           </div>
