@@ -5,6 +5,7 @@ import Song from "./song";
 
 const fullPlaylist = (props) => {
   const [currentSong, setCurrentSong] = useState(0);
+  const [song, setSong] = useState();
   const [videoIds, setVideoIds] = useState([]);
   const [thumbnail, setThumbnail] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
@@ -19,18 +20,18 @@ const fullPlaylist = (props) => {
   useEffect(() => {
     if (ytRef) {
       if (isPlaying) {
-        console.log("hi");
+        console.log(currentSong);
+        console.log(song);
+        if (videoIds[currentSong] != song) {
+          loadAndPlayCurrentSong(ytRef);
+        }
         ytRef.playVideo();
-        loadAndPlayCurrentSong(ytRef);
       } else {
         console.log(ytRef);
         ytRef.pauseVideo();
-        console.log("bye");
       }
     }
-
-    console.log(isPlaying);
-  });
+  }, [isPlaying, currentSong]);
 
   const displaySongs = () => {
     return props.songs.length != 0 ? (
@@ -79,9 +80,8 @@ const fullPlaylist = (props) => {
 
   const loadAndPlayCurrentSong = (player) => {
     let song = videoIds[currentSong];
+    setSong(song);
     player.loadVideoById(song);
-    player.playVideo();
-    console.log(player);
   };
 
   const onPlayerReady = (event) => {
