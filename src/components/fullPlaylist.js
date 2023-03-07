@@ -4,19 +4,49 @@ import YouTube from "react-youtube";
 import Song from "./song";
 
 const fullPlaylist = (props) => {
-  let videoIds = [];
-  const [thumbnail, setThumbnail] = useState();
   const [currentSong, setCurrentSong] = useState(0);
+  const [videoIds, setVideoIds] = useState([]);
+  const [thumbnail, setThumbnail] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
+  const [ytRef, setYTref] = useState();
+
   useEffect(() => {
-    if (videoIds.length != 0)
+    if (videoIds.length != 0) {
       setThumbnail(`https://img.youtube.com/vi/${videoIds[0]}/0.jpg`);
-  }, [videoIds]);
+    }
+  });
+
+  useEffect(() => {
+    if (ytRef) {
+      if (isPlaying) {
+        console.log("hi");
+        ytRef.playVideo();
+        loadAndPlayCurrentSong(ytRef);
+      } else {
+        console.log(ytRef);
+        ytRef.pauseVideo();
+        console.log("bye");
+      }
+    }
+
+    console.log(isPlaying);
+  });
 
   const displaySongs = () => {
     return props.songs.length != 0 ? (
       props.songs.map((song) => {
-        return <Song key={song.song_id} data={song} videoIds={videoIds} />;
+        return (
+          <Song
+            key={song.song_id}
+            data={song}
+            videoIds={videoIds}
+            setVideoIds={setVideoIds}
+            currentSong={videoIds[currentSong]}
+            setCurrentSong={setCurrentSong}
+            isPlaying={isPlaying}
+            setIsPlaying={setIsPlaying}
+          />
+        );
       })
     ) : (
       <> </>
@@ -29,8 +59,8 @@ const fullPlaylist = (props) => {
 
   // https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=Ks-_Mh1QhMc&key=[YOUR_API_KEY]' \
 
-  const handlePlay = () => {
-    setIsPlaying(true);
+  const handlePlayOrPause = () => {
+    isPlaying ? setIsPlaying(false) : setIsPlaying(true);
   };
 
   const playerOptions = {
@@ -42,21 +72,27 @@ const fullPlaylist = (props) => {
     },
   };
 
+  const incSong = () => {
+    let curr = currentSong + 1;
+    setCurrentSong(curr % props.songs.length);
+  };
+
   const loadAndPlayCurrentSong = (player) => {
-    console.log(player);
-    let song = props.songs[currentSong.num];
+    let song = videoIds[currentSong];
     player.loadVideoById(song);
     player.playVideo();
+    console.log(player);
   };
 
   const onPlayerReady = (event) => {
     loadAndPlayCurrentSong(event.target);
-    event.target.playVideo();
+    // event.target.pauseVideo();
   };
 
   function onPlayerStateChange(event) {
     let playerStatus = event.data;
     let player = event.target;
+    setYTref(player);
     if (playerStatus === -1) {
       // VIDEO UNSTARTED
       console.log("-1 Video unstarted");
@@ -98,10 +134,20 @@ const fullPlaylist = (props) => {
       <div className="flex w-full max-w-lg justify-center text-sm  font-bold py-6">
         <button
           className="flex justify-center items-center w-full h-12 py-5 text-[#1C1C1E] rounded-md mr-2 border-solid border-2 border-[#D5D5D5] bg-[#D5D5D5]"
-          onClick={handlePlay}
+          onClick={handlePlayOrPause}
         >
-          <img src="/play.svg" className="mr-1" />
-          PLAY ALL
+          {isPlaying ? (
+            <>
+              <img src="/pause.svg" className="mr-1" />
+              PAUSE
+            </>
+          ) : (
+            <>
+              {" "}
+              <img src="/play.svg" className="mr-1" />
+              PLAY ALL
+            </>
+          )}
         </button>
         <button className="flex justify-center items-center w-full h-12 rounded-md  border-solid py-5 border-2 border-[#D5D5D5] ml-2">
           <img src="/shuffle.svg" className="mr-1" />
@@ -111,9 +157,9 @@ const fullPlaylist = (props) => {
       <div className="pb-4 w-full text-sm max-w-lg">{getNumSongs()}</div>
       <ul className="w-full text-sm max-w-lg">{displaySongs()}</ul>
 
-      {/* {currentSong.isPlaying ? (
+      {/* {isPlaying ? (
         <YouTube
-          videoId={props.songs[currentSong.num]}
+          videoId={videoIds[currentSong]}
           opts={playerOptions}
           onReady={onPlayerReady}
           onStateChange={onPlayerStateChange}
@@ -121,11 +167,12 @@ const fullPlaylist = (props) => {
       ) : (
         <></>
       )} */}
-      {isPlaying ? (
-        <YouTube videoId="P8q3JOoOcOs" opts={playerOptions} />
-      ) : (
-        <></>
-      )}
+      <YouTube
+        videoId={videoIds[currentSong]}
+        opts={playerOptions}
+        onReady={onPlayerReady}
+        onStateChange={onPlayerStateChange}
+      />
     </div>
   );
 };

@@ -33,12 +33,24 @@ const Song = (props) => {
     const videoId = getYoutubeId();
 
     if (videoId && !props.videoIds.includes(`${videoId}`)) {
-      props.videoIds.push(videoId);
+      let videoIds = props.videoIds;
+      videoIds.push(videoId);
+      props.setVideoIds(videoIds);
     }
   });
 
   const handlePlay = () => {
-    console.log("play");
+    const id = getYoutubeId();
+    const index = props.videoIds.findIndex((element) => element == id);
+    props.setCurrentSong(index);
+    props.setIsPlaying(true);
+  };
+
+  const handlePause = () => {
+    const id = getYoutubeId();
+    const index = props.videoIds.findIndex((element) => element == id);
+    props.setCurrentSong(index);
+    props.setIsPlaying(false);
   };
 
   return (
@@ -55,7 +67,11 @@ const Song = (props) => {
       </div>
 
       <div className="flex justify-center w-[40px] h-[35px] rounded-tr-lg rounded-bl-lg bg-[#e65722]">
-        <img src="/lightPlay.svg" className="p-2" onClick={handlePlay} />
+        {props.isPlaying && props.currentSong == getYoutubeId() ? (
+          <img src="/lightPause.svg" className="p-2" onClick={handlePause} />
+        ) : (
+          <img src="/lightPlay.svg" className="p-2" onClick={handlePlay} />
+        )}
       </div>
     </li>
   );
