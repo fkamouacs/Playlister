@@ -86,7 +86,7 @@ const fullPlaylist = (props) => {
 
   const onPlayerReady = (event) => {
     loadAndPlayCurrentSong(event.target);
-    // event.target.pauseVideo();
+    event.target.pauseVideo();
   };
 
   function onPlayerStateChange(event) {
