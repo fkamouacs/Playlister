@@ -12,6 +12,13 @@ export default function Home() {
     return undefined;
   };
 
+  const getUserId = () => {
+    if (res.user) {
+      return res.user.id;
+    }
+    return undefined;
+  };
+
   return (
     <>
       <Head>
@@ -21,7 +28,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="h-full">
-        <Playlists isLoggedIn={res.isLoggedIn} username={getUsername()} />
+        <Playlists
+          isLoggedIn={res.isLoggedIn}
+          username={getUsername()}
+          id={getUserId()}
+        />
       </main>
     </>
   );

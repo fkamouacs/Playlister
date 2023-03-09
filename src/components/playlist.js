@@ -5,7 +5,6 @@ import axios from "axios";
 import FullPlaylist from "./fullPlaylist";
 
 const playlist = (props) => {
-  const [currentSong, setCurrentSong] = useState();
   const [songs, setSongs] = useState([]);
   const [thumbnail, setThumbnail] = useState();
   const router = useRouter();
@@ -43,6 +42,13 @@ const playlist = (props) => {
     return `https://img.youtube.com/vi/${id}/0.jpg`;
   };
 
+  const handleThumbnail = () => {
+    if (thumbnail) {
+      return thumbnail;
+    }
+    return "/blankthumbnail.jpg";
+  };
+
   return (
     <div>
       {pathname == "/playlist/[id]" ? (
@@ -51,7 +57,7 @@ const playlist = (props) => {
         <Link className="flex flex-col m-1 " href={`/playlist/${props.id}`}>
           <img
             className="h-[118px] w-[210px]  rounded-lg object-cover"
-            src={thumbnail}
+            src={handleThumbnail()}
           />
           <h2 className="text-[14px] font-bold text-[#0F0F0F">{props.title}</h2>
           <div

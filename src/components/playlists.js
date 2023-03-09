@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 import Playlist from "./playlist";
+import CreatePlaylist from "../components/createPlaylist";
 
 const playlists = (props) => {
   const [playlists, setPlaylists] = useState([]);
+  const [createPlaylist, setCreatePlaylist] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     // get playlists for current profile
@@ -32,7 +36,30 @@ const playlists = (props) => {
       : null;
   };
 
-  return <div className="flex mx-4 my-4">{displayPlaylists()} </div>;
+  const handleAddPlaylist = () => {
+    setCreatePlaylist(true);
+  };
+
+  return (
+    <div>
+      <div className="flex flex-wrap  mx-4 my-4">
+        <div className="flex">{displayPlaylists()} </div>
+        <div
+          className="flex justify-center items-center w-[210px] h-[118px] cursor-pointer"
+          onClick={handleAddPlaylist}
+        >
+          <img src="/plus.svg" />
+          add playlist
+        </div>
+      </div>
+
+      {createPlaylist ? (
+        <CreatePlaylist createPlaylist={setCreatePlaylist} id={props.id} />
+      ) : (
+        <></>
+      )}
+    </div>
+  );
 };
 
 export default playlists;
