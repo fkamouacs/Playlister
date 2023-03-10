@@ -2,7 +2,7 @@
 
 
 
-[![demo](https://img.youtube.com/vi/-R74MWnp7xs/0.jpg)](https://www.youtube.com/watch?v=-R74MWnp7xs)
+                                [![demo](https://img.youtube.com/vi/-R74MWnp7xs/0.jpg)](https://www.youtube.com/watch?v=-R74MWnp7xs)
 
 The web application enables users to generate customized lists of YouTube videos and also allows them to listen to playlists created by other individuals.
 
