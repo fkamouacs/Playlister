@@ -38,9 +38,9 @@ export default function Login() {
               <div className="text-4xl font-bold tracking-wide p-8 mt-4">
                 Playlister
               </div>
-              <div className="w-[350px] mx-auto flex flex-col justify-center border-solid border-[#ccc] rounded-[5px] px-5">
+              <div className="w-[350px] mx-auto flex flex-col justify-center  border-solid border-[#ccc] rounded-[5px] px-5">
                 <input
-                  className="outline-none text-sm w-full border  mb-5 p-2.5 rounded-[5px] border-solid border-[#ccc]"
+                  className="outline-none text-sm w-full border text-[#1C1C1E]  mb-5 p-2.5 rounded-[5px] border-solid border-[#ccc]"
                   type="email"
                   placeholder="Email"
                   name="email"
@@ -48,7 +48,7 @@ export default function Login() {
                 />
 
                 <input
-                  className="outline-none text-sm w-full border mb-5 p-2.5 rounded-[5px] border-solid border-[#ccc]"
+                  className="outline-none text-sm w-full border  text-[#1C1C1E] mb-5 p-2.5 rounded-[5px] border-solid border-[#ccc]"
                   type="password"
                   placeholder="Password"
                   name="password"
@@ -56,7 +56,7 @@ export default function Login() {
                 />
 
                 <input
-                  className="bg-[#cf4e1f] font-medium text-[white] cursor-pointer px-5 py-2.5 rounded-[5px] border-[none] w-full mb-8"
+                  className="bg-[#cf4e1f] font-medium   cursor-pointer px-5 py-2.5 rounded-[5px] border-[none] w-full mb-8"
                   type="submit"
                   value="Log in"
                   onClick={(e) => {

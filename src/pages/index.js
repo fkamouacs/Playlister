@@ -1,9 +1,16 @@
 import Head from "next/head";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 import useAuth from "../hooks/useAuth";
 import Playlists from "../components/playlists";
 
 export default function Home() {
   const res = useAuth();
+  const [loggedIn, setLoggedIn] = useState(res.isLoggedIn);
+
+  useEffect(() => {
+    setLoggedIn(res.isLoggedIn);
+  });
 
   const getUsername = () => {
     if (res.user) {
@@ -28,11 +35,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="h-full">
-        <Playlists
-          isLoggedIn={res.isLoggedIn}
-          username={getUsername()}
-          id={getUserId()}
-        />
+        {loggedIn ? (
+          <Playlists
+            isLoggedIn={res.isLoggedIn}
+            username={getUsername()}
+            id={getUserId()}
+          />
+        ) : (
+          <div className="fixed flex justify-center items-center w-full h-full">
+            <Link href="/login" className="font-bold text-[#e65722]">
+              Login
+            </Link>{" "}
+            &nbsp;or{" "}
+            <Link href="/signup" className="font-bold text-[#e65722]">
+              &nbsp;Signup
+            </Link>
+            &nbsp;to create playlists
+          </div>
+        )}
       </main>
     </>
   );

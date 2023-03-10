@@ -22,18 +22,14 @@ const fullPlaylist = (props) => {
     }
   });
 
-  console.log(props);
   useEffect(() => {
     if (ytRef) {
       if (isPlaying) {
-        console.log(currentSong);
-        console.log(song);
         if (videoIds[currentSong] != song) {
           loadAndPlayCurrentSong(ytRef);
         }
         ytRef.playVideo();
       } else {
-        console.log(ytRef);
         ytRef.pauseVideo();
       }
     }
@@ -52,6 +48,7 @@ const fullPlaylist = (props) => {
             setCurrentSong={setCurrentSong}
             isPlaying={isPlaying}
             setIsPlaying={setIsPlaying}
+            owner={props.data.owner}
           />
         );
       })
@@ -63,8 +60,6 @@ const fullPlaylist = (props) => {
   const getNumSongs = () => {
     return props.songs.length != 1 ? `${props.songs.length} songs` : `1 song`;
   };
-
-  // https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=Ks-_Mh1QhMc&key=[YOUR_API_KEY]' \
 
   const handlePlayOrPause = () => {
     isPlaying ? setIsPlaying(false) : setIsPlaying(true);
@@ -123,7 +118,6 @@ const fullPlaylist = (props) => {
   }
 
   const handleAddSong = () => {
-    console.log("addsong");
     setAddSongs(true);
   };
 
@@ -141,7 +135,10 @@ const fullPlaylist = (props) => {
 
           <div className="flex flex-col font-['Roboto_Condensed'] tracking-wide pt-4 ">
             <div className="text-3xl font-bold">{props.data.title}</div>
-            <div className="text-[#b8461b]" onClick={handleOwnerClick}>
+            <div
+              className="text-[#b8461b] cursor-pointer"
+              onClick={handleOwnerClick}
+            >
               {props.data.username}
             </div>
           </div>
@@ -173,13 +170,11 @@ const fullPlaylist = (props) => {
       <div className="pb-4 w-full text-sm max-w-lg">{getNumSongs()}</div>
 
       {props.data.user_id == props.data.owner ? (
-        <div
-          className="flex items-center w-full text-sm max-w-lg bg-[#252527] pt-2 pb-2 pr-2 "
-          onClick={handleAddSong}
-        >
+        <div className="flex items-center w-full text-sm max-w-lg bg-[#252527] pt-2 pb-2 pr-2 ">
           <img
-            className="w-[105px] h-[60px] object-scale-down bg-[#D5D5D5] rounded-lg "
+            className="w-[105px] h-[60px] object-scale-down bg-[#D5D5D5] cursor-pointer rounded-lg "
             src="/plusimg.png"
+            onClick={handleAddSong}
           />
           <div className="pl-2">Add Songs</div>
         </div>

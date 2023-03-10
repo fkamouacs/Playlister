@@ -1,9 +1,14 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
+import useAuth from "../hooks/useAuth";
 
 const Song = (props) => {
   const [song, setSong] = useState({});
-
+  const { asPath } = useRouter();
+  const router = useRouter();
+  const res = useAuth();
+  console.log(res);
   useEffect(() => {
     axios
       .post("/api/playlists/getSong", { id: props.data.song_id })
@@ -11,6 +16,13 @@ const Song = (props) => {
         setSong(res.data);
       });
   }, [props.data]);
+
+  const getUserId = () => {
+    if (res.user) {
+      return res.user.id;
+    }
+    return undefined;
+  };
 
   const getYoutubeId = () => {
     if (JSON.stringify(song) != "{}") {
@@ -53,6 +65,24 @@ const Song = (props) => {
     props.setIsPlaying(false);
   };
 
+  const getPathname = () => {
+    if (asPath != "/[username]") {
+      return asPath.replace("/playlist/", "");
+    }
+    return undefined;
+  };
+
+  const handleDelete = () => {
+    console.log("delete");
+    const args = {
+      song_id: props.data.song_id,
+      playlist_id: getPathname(),
+    };
+    axios.post("/api/playlists/deleteSong", args).then((res) => {
+      router.reload(window.location.pathname);
+    });
+  };
+
   return (
     <li className="list-none rounded-lg flex justify-between mb-4 bg-[#252527]">
       <div className="flex  py-2">
@@ -65,13 +95,24 @@ const Song = (props) => {
           <div className="text-[#b8461b] text-[12px]">owner</div>
         </div>
       </div>
-
-      <div className="flex justify-center w-[40px] h-[35px] rounded-tr-lg rounded-bl-lg bg-[#e65722]">
-        {props.isPlaying && props.currentSong == getYoutubeId() ? (
-          <img src="/lightPause.svg" className="p-2" onClick={handlePause} />
+      <div className="flex ">
+        {props.owner == getUserId() ? (
+          <img
+            className="w-[20px] h-[20px] mt-2 mr-4 cursor-pointer"
+            src="/trash-2.svg"
+            onClick={handleDelete}
+          />
         ) : (
-          <img src="/lightPlay.svg" className="p-2" onClick={handlePlay} />
+          <></>
         )}
+
+        <div className="flex justify-center w-[40px] h-[35px] rounded-tr-lg rounded-bl-lg bg-[#e65722] cursor-pointer">
+          {props.isPlaying && props.currentSong == getYoutubeId() ? (
+            <img src="/lightPause.svg" className="p-2" onClick={handlePause} />
+          ) : (
+            <img src="/lightPlay.svg" className="p-2" onClick={handlePlay} />
+          )}
+        </div>
       </div>
     </li>
   );

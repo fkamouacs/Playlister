@@ -49,7 +49,7 @@ export default function Signup() {
               </div>
               <div className="w-[350px] mx-auto flex flex-col justify-center border-solid border-[#ccc] rounded-[5px] px-5">
                 <input
-                  className="outline-none text-sm w-full border  mb-5 p-2.5 rounded-[5px] border-solid border-[#ccc]"
+                  className="outline-none text-sm w-full  text-[#1C1C1E] border  mb-5 p-2.5 rounded-[5px] border-solid border-[#ccc]"
                   type="email"
                   placeholder="Email"
                   name="email"
@@ -57,14 +57,14 @@ export default function Signup() {
                 />
 
                 <input
-                  className="outline-none text-sm w-full border  mb-5 p-2.5 rounded-[5px] border-solid border-[#ccc]"
+                  className="outline-none text-sm text-[#1C1C1E] w-full border  mb-5 p-2.5 rounded-[5px] border-solid border-[#ccc]"
                   type="text"
                   placeholder="Username"
                   name="username"
                   onChange={(e) => setUsername(e.target.value)}
                 />
                 <input
-                  className="outline-none text-sm w-full border mb-5 p-2.5 rounded-[5px] border-solid border-[#ccc]"
+                  className="outline-none text-sm text-[#1C1C1E]  w-full border mb-5 p-2.5 rounded-[5px] border-solid border-[#ccc]"
                   type="password"
                   placeholder="Password"
                   name="password"
