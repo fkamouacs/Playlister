@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import axios from "axios";
 import YouTube from "react-youtube";
 import Song from "./song";
+import AddSongs from "../components/addSongs";
 
 const fullPlaylist = (props) => {
   const [currentSong, setCurrentSong] = useState(0);
@@ -10,6 +11,7 @@ const fullPlaylist = (props) => {
   const [thumbnail, setThumbnail] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
   const [ytRef, setYTref] = useState();
+  const [addSongs, setAddSongs] = useState(false);
 
   useEffect(() => {
     if (videoIds.length != 0) {
@@ -17,6 +19,7 @@ const fullPlaylist = (props) => {
     }
   });
 
+  console.log(props);
   useEffect(() => {
     if (ytRef) {
       if (isPlaying) {
@@ -116,6 +119,11 @@ const fullPlaylist = (props) => {
     }
   }
 
+  const handleAddSong = () => {
+    console.log("addsong");
+    setAddSongs(true);
+  };
+
   return (
     <div className="flex flex-col items-center px-4 w-full">
       <div className=" w-full max-w-lg">
@@ -155,24 +163,36 @@ const fullPlaylist = (props) => {
         </button>
       </div>
       <div className="pb-4 w-full text-sm max-w-lg">{getNumSongs()}</div>
-      <ul className="w-full text-sm max-w-lg">{displaySongs()}</ul>
 
-      {/* {isPlaying ? (
-        <YouTube
-          videoId={videoIds[currentSong]}
-          opts={playerOptions}
-          onReady={onPlayerReady}
-          onStateChange={onPlayerStateChange}
-        />
+      {props.data.user_id == props.data.owner ? (
+        <div
+          className="flex items-center w-full text-sm max-w-lg bg-[#252527] pt-2 pb-2 pr-2 "
+          onClick={handleAddSong}
+        >
+          <img
+            className="w-[105px] h-[60px] object-scale-down bg-[#D5D5D5] rounded-lg "
+            src="/plusimg.png"
+          />
+          <div className="pl-2">Add Songs</div>
+        </div>
       ) : (
         <></>
-      )} */}
+      )}
+
+      <ul className="w-full text-sm max-w-lg">{displaySongs()}</ul>
+
       <YouTube
         videoId={videoIds[currentSong]}
         opts={playerOptions}
         onReady={onPlayerReady}
         onStateChange={onPlayerStateChange}
       />
+
+      {addSongs ? (
+        <AddSongs addSongs={setAddSongs} id={props.data.id} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

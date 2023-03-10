@@ -10,6 +10,8 @@ const list = () => {
   const res = useAuth();
   const [playlist, setPlaylist] = useState([]);
 
+  console.log(res);
+
   useEffect(() => {
     // get playlist for current page
     if (id) {
@@ -26,6 +28,12 @@ const list = () => {
     return undefined;
   };
 
+  const getUserId = () => {
+    if (res.user) {
+      return res.user.id;
+    }
+    return undefined;
+  };
   return (
     <div>
       <Playlist
@@ -34,6 +42,7 @@ const list = () => {
         title={playlist.title}
         owner={playlist.user_id}
         username={getUsername()}
+        user_id={getUserId()}
       />
     </div>
   );

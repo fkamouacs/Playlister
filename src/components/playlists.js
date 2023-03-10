@@ -43,7 +43,7 @@ const playlists = (props) => {
   return (
     <div>
       <div className="flex flex-wrap  mx-4 my-4">
-        <div className="flex">{displayPlaylists()} </div>
+        <div className="flex flex-wrap">{displayPlaylists()} </div>
         <div
           className="flex justify-center items-center w-[210px] h-[118px] cursor-pointer"
           onClick={handleAddPlaylist}

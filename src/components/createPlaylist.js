@@ -33,8 +33,8 @@ const CreatePlaylist = (props) => {
   };
 
   return (
-    <div className="flex justify-center items-center fixed top-0 left-0 w-full h-screen  opacity-80 text-[#1C1C1E] bg-[#1C1C1E]">
-      <div className="flex flex-col text-center bg-[#D5D5D5] rounded-lg">
+    <div className="flex justify-center items-center fixed top-0 left-0 w-full h-screen  text-[#1C1C1E]  ">
+      <div className="fixed flex flex-col text-center  bg-[#D5D5D5] rounded-lg z-40">
         <div className="p-4">
           <h2 className="font-bold">New Playlist</h2>
           <p>Enter a name for this new playlist.</p>
@@ -61,6 +61,7 @@ const CreatePlaylist = (props) => {
           </button>
         </div>
       </div>
+      <div className="w-full h-screen opacity-80 bg-[#1C1C1E] "></div>
     </div>
   );
 };

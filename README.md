@@ -32,7 +32,7 @@ npm run dev
 
 ## Postgresql server
 
-Use the createTables.sql file to setup postgresql tables.
+Use the createTableStatements.sql file to setup postgresql tables.
 
 create a .env.local file with the following variables
 
