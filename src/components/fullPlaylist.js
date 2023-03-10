@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
 import YouTube from "react-youtube";
+import { useRouter } from "next/router";
 import Song from "./song";
 import AddSongs from "../components/addSongs";
 
@@ -12,6 +13,8 @@ const fullPlaylist = (props) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [ytRef, setYTref] = useState();
   const [addSongs, setAddSongs] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (videoIds.length != 0) {
@@ -124,6 +127,9 @@ const fullPlaylist = (props) => {
     setAddSongs(true);
   };
 
+  const handleOwnerClick = () => {
+    router.push(`/${props.data.username}`);
+  };
   return (
     <div className="flex flex-col items-center px-4 w-full">
       <div className=" w-full max-w-lg">
@@ -135,7 +141,9 @@ const fullPlaylist = (props) => {
 
           <div className="flex flex-col font-['Roboto_Condensed'] tracking-wide pt-4 ">
             <div className="text-3xl font-bold">{props.data.title}</div>
-            <div className="text-[#b8461b]">{props.data.username}</div>
+            <div className="text-[#b8461b]" onClick={handleOwnerClick}>
+              {props.data.username}
+            </div>
           </div>
         </div>
       </div>
