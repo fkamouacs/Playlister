@@ -12,7 +12,7 @@ The web application enables users to generate customized lists of YouTube videos
 * axios
 * pg
 * Javascript
-* 
+
 ### Backend
 
 * Postgresql
