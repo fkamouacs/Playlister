@@ -15,6 +15,11 @@ const username = () => {
     return undefined;
   };
 
+  const getUsername = () => {
+    if (res.user) return res.user.username;
+    return undefined;
+  };
+
   const getPathname = () => {
     if (asPath != "/[username]") {
       return asPath.replace("/", "");
@@ -28,6 +33,7 @@ const username = () => {
         isLoggedIn={res.isLoggedIn}
         username={getPathname()}
         id={getUserId()}
+        profileName={getUsername()}
       />
     </div>
   );
