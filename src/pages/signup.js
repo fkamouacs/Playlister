@@ -26,6 +26,9 @@ export default function Signup() {
           .then((res) => {
             localStorage.setItem("token", res.data.token);
             router.push("/");
+          })
+          .catch((error) => {
+            setSignupError("invalid");
           });
       } else {
         const error = res.data.constraint;
@@ -64,7 +67,7 @@ export default function Signup() {
                   onChange={(e) => setUsername(e.target.value)}
                 />
                 <input
-                  className="outline-none text-sm text-[#1C1C1E]  w-full border mb-5 p-2.5 rounded-[5px] border-solid border-[#ccc]"
+                  className="outline-none text-sm w-full border mb-5 p-2.5 rounded-[5px] border-solid border-[#ccc]"
                   type="password"
                   placeholder="Password"
                   name="password"
@@ -91,6 +94,13 @@ export default function Signup() {
                 {signupError === "username" ? (
                   <div className="text-[#ed4956]">
                     This username is already taken.
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {signupError === "invalid" ? (
+                  <div className="text-[#ed4956]">
+                    Sorry, incorrect username or password.
                   </div>
                 ) : (
                   <></>
