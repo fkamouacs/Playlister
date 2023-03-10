@@ -6,16 +6,16 @@ The web application enables users to generate customized lists of YouTube videos
 
 ### Frontend
 
-*React 
-*NextJS
-*Tailwindcss
-*axios
-*pg
+* React 
+* NextJS
+* Tailwindcss
+* axios
+* pg
 
 ### Backend
 
-*Postgresql
-*jsonwebtoken
+* Postgresql
+* jsonwebtoken
 
 ## Installation
 
