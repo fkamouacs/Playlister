@@ -11,7 +11,8 @@ The web application enables users to generate customized lists of YouTube videos
 * Tailwindcss
 * axios
 * pg
-
+* Javascript
+* 
 ### Backend
 
 * Postgresql
